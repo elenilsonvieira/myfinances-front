@@ -5,7 +5,7 @@ import Home from "../screens/home/Home";
 import Login from '../screens/login/Login';
 import CreateUser from '../screens/createUser/CreateUser';
 
-function MyRoutes() {
+function AppRoutes() {
    return(
        <BrowserRouter>
         <Routes>
@@ -17,4 +17,4 @@ function MyRoutes() {
    );
 }
 
-export default MyRoutes;
+export default AppRoutes;

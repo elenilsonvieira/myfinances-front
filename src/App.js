@@ -3,7 +3,7 @@ import 'bootswatch/dist/flatly/bootstrap.css';
 import './App.css';
 
 import Navbar from './components/NavBar';
-import MyRoutes from './main/MyRoutes';
+import AppRoutes from './main/AppRoutes';
 
 export default class App extends React.Component {
 
@@ -11,7 +11,7 @@ export default class App extends React.Component {
     return(
       <div>
         <Navbar />
-        <MyRoutes />
+        <AppRoutes />
       </div>
     )
   }
