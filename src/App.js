@@ -2,9 +2,8 @@ import React from 'react';
 import 'bootswatch/dist/flatly/bootstrap.css';
 import './App.css';
 
-import Login from './screens/login/Login';
-import CreateUser from './screens/createUser/CreateUser';
 import Navbar from './components/NavBar';
+import MyRoutes from './main/MyRoutes';
 
 export default class App extends React.Component {
 
@@ -12,7 +11,7 @@ export default class App extends React.Component {
     return(
       <div>
         <Navbar />
-        <CreateUser />
+        <MyRoutes />
       </div>
     )
   }
