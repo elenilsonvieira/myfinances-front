@@ -1,10 +1,12 @@
 import React from 'react';
 import './Login.css';
 
+import { withRouter  } from 'react-router-dom';
+
 import Card from '../../components/Card';
 import FormGroup from '../../components/FormGroup';
 
-export default class Login extends React.Component {
+class Login extends React.Component {
 
   state = {
     email: '',
@@ -14,6 +16,10 @@ export default class Login extends React.Component {
   login = () => {
     console.log('Email: ', this.state.email);
     console.log('Password: ', this.state.password);
+  }
+
+  createUser = () => {
+    this.props.history.push('/createUser');
   }
 
   render(){
@@ -38,7 +44,7 @@ export default class Login extends React.Component {
                             value={this.state.password} onChange={(e) => this.setState({password: e.target.value})} />
                         </FormGroup>
                         <button className='btn btn-success' onClick={this.login}>Entrar</button>
-                        <button className='btn btn-danger'>Cadastrar</button>
+                        <button className='btn btn-danger' onClick={this.createUser}>Cadastrar</button>
                       </fieldset>
                     </div>
                   </div>
@@ -59,3 +65,5 @@ export default class Login extends React.Component {
   };
 
 }
+
+export default withRouter (Login);

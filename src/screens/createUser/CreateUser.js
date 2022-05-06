@@ -1,10 +1,12 @@
 import React from 'react'
 import './CreateUser.css';
 
+import { withRouter  } from 'react-router-dom';
+
 import Card from '../../components/Card'
 import FormGroup from '../../components/FormGroup'
 
-export default class CreateUser extends React.Component{
+class CreateUser extends React.Component{
 
     state = {
         name : '',
@@ -18,7 +20,7 @@ export default class CreateUser extends React.Component{
     }
 
     cancel = () => {
-        console.log('cancel');
+        this.props.history.push('/');
     }
 
     render(){
@@ -70,3 +72,5 @@ export default class CreateUser extends React.Component{
         )
     }
 }
+
+export default withRouter(CreateUser);

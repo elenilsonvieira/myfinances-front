@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, BrowserRouter, Routes } from "react-router-dom";
+import { Route, BrowserRouter } from "react-router-dom";
 
 import Home from "../screens/home/Home";
 import Login from '../screens/login/Login';
@@ -7,13 +7,11 @@ import CreateUser from '../screens/createUser/CreateUser';
 
 function AppRoutes() {
    return(
-       <BrowserRouter>
-        <Routes>
-           <Route element = { <Home /> }  path="/" exact />
-           <Route element = { <Login /> }  path="/login" />
-           <Route element = { <CreateUser /> }  path="/createUser" />
-        </Routes>
-       </BrowserRouter>
+      <BrowserRouter>
+         <Route component = { Home }  path="/" exact />
+         <Route component = { Login }  path="/login" />
+         <Route component = { CreateUser }  path="/createUser" />
+      </BrowserRouter>
    );
 }
 
