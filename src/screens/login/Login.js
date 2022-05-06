@@ -27,12 +27,12 @@ export default class Login extends React.Component {
                   <div className='col-lg-12'>
                     <div className='bs-component'>
                       <fieldset>
-                        <FormGroup label='Email: *'>
+                        <FormGroup label='Email: *' htmlFor='inputEmail'>
                           <input type='email' className='form-control' id='inputEmail' 
                             area-aria-describedby='emailHelp' placeholder='Digite o email'
                             value={this.state.email} onChange={(e) => this.setState({email: e.target.value})} />
                         </FormGroup>
-                        <FormGroup label='Senha: *'>
+                        <FormGroup label='Senha: *' htmlFor='inputPassword'>
                           <input type='password' className='form-control' id='inputPassword' 
                             placeholder='Digite a Senha'
                             value={this.state.password} onChange={(e) => this.setState({password: e.target.value})} />
