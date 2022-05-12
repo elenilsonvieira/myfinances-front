@@ -2,6 +2,7 @@ import React from 'react'
 import './CreateUser.css';
 
 import { withRouter  } from 'react-router-dom';
+import axios from 'axios';
 
 import Card from '../../components/Card'
 import FormGroup from '../../components/FormGroup'
@@ -12,11 +13,25 @@ class CreateUser extends React.Component{
         name : '',
         email: '', 
         password: '',
-        passwordRepeat : ''
+        passwordRepeat : '',
     }
 
     create = () => {
-        console.log(this.state);
+        axios.post('http://localhost:8080/api/user', 
+            {
+                name: this.state.name,
+                email: this.state.email,
+                password: this.state.password
+            }
+        ).then( response => 
+            {
+                console.log(response);
+            }
+        ).catch( error => 
+            {
+                console.log(error.response);
+            }
+        );
     }
 
     cancel = () => {
