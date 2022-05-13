@@ -14,7 +14,7 @@ function AppRoutes() {
          <Route component = { Home }  path="/" exact />
          <Route component = { Login }  path="/login" />
          <Route component = { CreateUser }  path="/createUser" />
-         <Route component = { UpdateUser }  path="/updateUser" />
+         <Route component = { UpdateUser }  path="/updateUser/:id" />
          <Route component = { DeleteUser }  path="/deleteUser" />
          <Route component = { ViewUsers }  path="/viewUsers" />
       </BrowserRouter>

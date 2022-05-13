@@ -72,7 +72,7 @@ class ViewUsers extends React.Component {
     }
 
     edit = (userId) => {
-        this.props.history.push('/updateUser');
+        this.props.history.push(`/updateUser/${userId}`);
     }
 
     render(){
