@@ -2,6 +2,7 @@ import React from 'react';
 import './Login.css';
 
 import { withRouter  } from 'react-router-dom';
+import axios from 'axios';
 
 import Card from '../../components/Card';
 import FormGroup from '../../components/FormGroup';
@@ -9,13 +10,25 @@ import FormGroup from '../../components/FormGroup';
 class Login extends React.Component {
 
   state = {
-    email: '',
+    username: '',
     password: ''
   }
 
   login = () => {
-    console.log('Email: ', this.state.email);
-    console.log('Password: ', this.state.password);
+        axios.post('http://localhost:8080/api/login', 
+            {
+                username: this.state.username,
+                password: this.state.password
+            }
+        ).then( response => 
+            {
+              this.props.history.push('/viewUsers');
+            }
+        ).catch( error => 
+            {
+                console.log(error.response);
+            }
+        );
   }
 
   createUser = () => {
@@ -33,10 +46,10 @@ class Login extends React.Component {
                   <div className='col-lg-12'>
                     <div className='bs-component'>
                       <fieldset>
-                        <FormGroup label='Email: *' htmlFor='inputEmail'>
-                          <input type='email' className='form-control' id='inputEmail' 
-                            area-aria-describedby='emailHelp' placeholder='Digite o email'
-                            value={this.state.email} onChange={(e) => this.setState({email: e.target.value})} />
+                        <FormGroup label='Usuário: *' htmlFor='inputUsername'>
+                          <input type='text' className='form-control' id='inputUsername' 
+                            area-aria-describedby='emailHelp' placeholder='Digite o usuário'
+                            value={this.state.username} onChange={(e) => this.setState({username: e.target.value})} />
                         </FormGroup>
                         <FormGroup label='Senha: *' htmlFor='inputPassword'>
                           <input type='password' className='form-control' id='inputPassword' 
