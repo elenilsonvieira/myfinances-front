@@ -22,6 +22,7 @@ class Login extends React.Component {
             }
         ).then( response => 
             {
+              localStorage.setItem('loggedUser', JSON.stringify(response.data));
               this.props.history.push('/viewUsers');
             }
         ).catch( error => 

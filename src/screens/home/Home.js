@@ -5,6 +5,13 @@ import Card from '../../components/Card';
 
 export default class Home extends React.Component{
 
+    getLoggedUser = () => {
+        var value = localStorage.getItem('loggedUser');
+        var user = JSON.parse(value);
+
+        return user;
+    }
+
     render(){
         return (
             <div className='container'>
@@ -15,6 +22,8 @@ export default class Home extends React.Component{
                                 <label>Projeto criado para a disciplina de DAC - IFPB Campus Monteiro</label>
                                 <br />
                                 <label>Elenilson Vieira - elenilson.vieira@ifpb.edu.br</label>
+                                <br />
+                                <label>Usuário logado: { this.getLoggedUser().name }</label>
                             </div>
                         </div>
                     </div>

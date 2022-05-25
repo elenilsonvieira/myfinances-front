@@ -16,6 +16,12 @@ class UpdateUser extends React.Component{
         password: '',
     }
 
+    componentDidMount(){
+        const params = this.props.match.params;
+        const id = params.id;
+        this.setState({id});
+    }
+
     update = () => {
         axios.put(`http://localhost:8080/api/user/${this.state.id}`, 
             {

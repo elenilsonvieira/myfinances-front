@@ -17,6 +17,10 @@ class ViewUsers extends React.Component {
         users : []
     }
 
+    componentDidMount(){
+        this.find();
+    }
+
     find = () => {
         var params = '?';
 
