@@ -33,7 +33,7 @@ class UpdateUser extends React.Component{
             }
         ).then( response => 
             {
-                console.log(response);
+                this.props.history.push('/viewUsers');
             }
         ).catch( error => 
             {
@@ -55,8 +55,6 @@ class UpdateUser extends React.Component{
                 const username = user.username;
                 const name = user.name;
                 const email = user.email;
-
-                console.log('userrrrrr', id, username, name, email);
 
                 this.setState({id, username, name, email});
             }
