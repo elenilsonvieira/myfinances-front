@@ -7,6 +7,11 @@ export default class Home extends React.Component{
 
     getLoggedUser = () => {
         var value = localStorage.getItem('loggedUser');
+
+        if(!value){
+            return null;
+        }
+
         var user = JSON.parse(value);
 
         return user;
@@ -23,7 +28,7 @@ export default class Home extends React.Component{
                                 <br />
                                 <label>Elenilson Vieira - elenilson.vieira@ifpb.edu.br</label>
                                 <br />
-                                <label>Usuário logado: { this.getLoggedUser().name }</label>
+                                <label>Usuário logado: { this.getLoggedUser() != null ?  this.getLoggedUser().name : ''}</label>
                             </div>
                         </div>
                     </div>
