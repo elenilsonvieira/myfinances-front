@@ -12,14 +12,15 @@ class UpdateUser extends React.Component{
     state = {
         id: 0,
         name : '',
-        email: '', 
+        email: '',
+        username: '', 
         password: '',
     }
 
     componentDidMount(){
         const params = this.props.match.params;
         const id = params.id;
-        this.setState({id});
+        this.findById(id);
     }
 
     update = () => {
@@ -27,6 +28,7 @@ class UpdateUser extends React.Component{
             {
                 name: this.state.name,
                 email: this.state.email,
+                username: this.state.username,
                 password: this.state.password
             }
         ).then( response => 
@@ -44,6 +46,27 @@ class UpdateUser extends React.Component{
         this.props.history.push('/');
     }
 
+    findById = (userId) => {
+        axios.get(`http://localhost:8080/api/user?id=${userId}`)
+        .then( response => 
+            {
+                const user = response.data[0];
+                const id = user.id;
+                const username = user.username;
+                const name = user.name;
+                const email = user.email;
+
+                console.log('userrrrrr', id, username, name, email);
+
+                this.setState({id, username, name, email});
+            }
+        ).catch( error => 
+            {
+                console.log(error.response);
+            }
+        );
+    }
+
     render(){
         return (
             <div className='container'>
@@ -54,7 +77,9 @@ class UpdateUser extends React.Component{
                                 <FormGroup label="Id: *" htmlFor="inputId">
                                     <input type="text" 
                                         id="inputId" 
+                                        disabled={true}
                                         className="form-control"
+                                        value={this.state.id}
                                         name="name"
                                         onChange={e => this.setState({id: e.target.value})} />
                                 </FormGroup>
@@ -62,13 +87,23 @@ class UpdateUser extends React.Component{
                                     <input type="text" 
                                         id="inputname" 
                                         className="form-control"
+                                        value={this.state.name}
                                         name="name"
                                         onChange={e => this.setState({name: e.target.value})} />
+                                </FormGroup>
+                                <FormGroup label="Username: *" htmlFor="inputUsername">
+                                    <input type="text" 
+                                        id="inputUsername"
+                                        className="form-control"
+                                        value={this.state.username}
+                                        name="username"
+                                        onChange={e => this.setState({username: e.target.value})} />
                                 </FormGroup>
                                 <FormGroup label="Email: *" htmlFor="inputEmail">
                                     <input type="email" 
                                         id="inputEmail"
                                         className="form-control"
+                                        value={this.state.email}
                                         name="email"
                                         onChange={e => this.setState({email: e.target.value})} />
                                 </FormGroup>
@@ -76,6 +111,7 @@ class UpdateUser extends React.Component{
                                     <input type="password" 
                                         id="inputpassword"
                                         className="form-control"
+                                        value={this.state.password}
                                         name="password"
                                         onChange={e => this.setState({password: e.target.value})} />
                                 </FormGroup>

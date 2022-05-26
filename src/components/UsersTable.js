@@ -7,6 +7,7 @@ export default props => {
             <tr key={user.id}>
                 <td>{user.id}</td>
                 <td>{user.name}</td>
+                <td>{user.username}</td>
                 <td>{user.email}</td>
                 <td>
                     <button type="button"   title="Editar"
@@ -30,6 +31,7 @@ export default props => {
                 <tr>
                     <th scope="col">Id</th>
                     <th scope="col">Name</th>
+                    <th scope="col">Username</th>
                     <th scope="col">Email</th>
                     <th scope="col">Ações</th>
                 </tr>
