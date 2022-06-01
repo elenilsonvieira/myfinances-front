@@ -4,8 +4,10 @@ import './CreateUser.css';
 import { withRouter  } from 'react-router-dom';
 import axios from 'axios';
 
-import Card from '../../components/Card'
-import FormGroup from '../../components/FormGroup'
+import Card from '../../components/Card';
+import FormGroup from '../../components/FormGroup';
+
+import { showSuccessMessage, showErrorMessage, showWarningMessage } from '../../components/Toastr';
 
 class CreateUser extends React.Component{
 
@@ -17,6 +19,15 @@ class CreateUser extends React.Component{
     }
 
     create = () => {
+        const errors = this.validate();
+
+        if(errors.length > 0){
+            errors.forEach( (message, index) => {
+                showErrorMessage(message);
+            } );
+            return false;
+        }
+
         axios.post('http://localhost:8080/api/user', 
             {
                 name: this.state.name,
@@ -25,7 +36,8 @@ class CreateUser extends React.Component{
             }
         ).then( response => 
             {
-                console.log(response);
+                showSuccessMessage("Usuário criado com sucesso!");
+                this.props.history.push("/login");
             }
         ).catch( error => 
             {
@@ -36,6 +48,28 @@ class CreateUser extends React.Component{
 
     cancel = () => {
         this.props.history.push('/');
+    }
+
+    validate = () => {
+        const errors = [];
+
+        if(!this.state.name){
+            errors.push('Campo Nome é obrigatório!');
+        }
+
+        if(!this.state.email){
+            errors.push('Campo Email é obrigatório!');
+        }else if(!this.state.email.match(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]/)){
+            errors.push('Informe um email válido!');
+        }
+
+        if(!this.state.password){
+            errors.push('Campo Senha é obrigatório!');
+        }else if(this.state.password !== this.state.passwordRepeat){
+            errors.push('As senhas não batem!');
+        }
+
+        return errors;
     }
 
     render(){

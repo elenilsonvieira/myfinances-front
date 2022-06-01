@@ -7,7 +7,7 @@ import axios from 'axios';
 import Card from '../../components/Card';
 import FormGroup from '../../components/FormGroup';
 
-import { showSuccessMessage } from '../../components/Toastr';
+import { showSuccessMessage, showErrorMessage, showWarningMessage } from '../../components/Toastr';
 
 class Login extends React.Component {
 

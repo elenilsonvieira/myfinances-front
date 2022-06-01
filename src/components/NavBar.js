@@ -17,8 +17,6 @@ function Navbar(props){
             <ul className="navbar-nav">
                 <NavbarItem href="/" label="Home" />
                 <NavbarItem href="/createUser" label="Cadastrar Usuário" />
-                <NavbarItem href="/updateUser" label="Atualizar de Usuário" />
-                <NavbarItem href="/deleteUser" label="Deletar Usuário" />
                 <NavbarItem href="/viewUsers" label="Usuários" />
                 <NavbarItem href="/login" label="Login" />
             </ul>
