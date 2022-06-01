@@ -7,6 +7,8 @@ import axios from 'axios';
 import Card from '../../components/Card';
 import FormGroup from '../../components/FormGroup';
 
+import { showSuccessMessage } from '../../components/Toastr';
+
 class Login extends React.Component {
 
   state = {
@@ -23,6 +25,7 @@ class Login extends React.Component {
         ).then( response => 
             {
               localStorage.setItem('loggedUser', JSON.stringify(response.data));
+              showSuccessMessage('Bem vindo!');
               this.props.history.push('/viewUsers');
             }
         ).catch( error => 
