@@ -15,7 +15,7 @@ export default class UserApiService extends ApiService {
     }
 
     delete(id){
-        return this.delete(`/${id}`);
+        return super.delete(`/${id}`);
     }
 
     find(params){

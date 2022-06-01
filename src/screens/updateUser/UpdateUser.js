@@ -8,6 +8,8 @@ import FormGroup from '../../components/FormGroup'
 
 import UserApiService from '../../services/UserApiService';
 
+import { showSuccessMessage, showErrorMessage, showWarningMessage } from '../../components/Toastr';
+
 class UpdateUser extends React.Component{
 
     state = {
@@ -48,6 +50,7 @@ class UpdateUser extends React.Component{
             }
         ).then( response => 
             {
+                showSuccessMessage(`Usuário ${this.state.name} atualizado com sucesso`);
                 this.props.history.push('/viewUsers');
             }
         ).catch( error => 

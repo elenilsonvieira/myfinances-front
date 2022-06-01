@@ -2,11 +2,14 @@ import React from 'react';
 import './ViewUsers.css';
 
 import { withRouter } from 'react-router-dom';
-import axios from 'axios';
 
 import Card from '../../components/Card';
 import FormGroup from '../../components/FormGroup';
 import UsersTable from '../../components/UsersTable';
+
+import UserApiService from '../../services/UserApiService';
+
+import { showSuccessMessage, showErrorMessage, showWarningMessage } from '../../components/Toastr';
 
 class ViewUsers extends React.Component {
 
@@ -15,6 +18,11 @@ class ViewUsers extends React.Component {
         email: '',
         id: '',
         users : []
+    }
+
+    constructor(){
+        super();
+        this.service = new UserApiService();
     }
 
     componentDidMount(){
@@ -48,7 +56,7 @@ class ViewUsers extends React.Component {
             params = `${params}email=${this.state.email}`;
         }
 
-        axios.get(`http://localhost:8080/api/user${params}`)
+        this.service.find(params)
         .then( response => 
             {
                 const users = response.data;
@@ -63,9 +71,10 @@ class ViewUsers extends React.Component {
     }
 
     delete = (userId) => {
-        axios.delete(`http://localhost:8080/api/user/${userId}`
+        this.service.delete(`/${userId}`
         ).then( response => 
             {
+                showSuccessMessage(`Usuário ${userId} deletado com sucesso`);
                 this.find();
             }
         ).catch( error => 

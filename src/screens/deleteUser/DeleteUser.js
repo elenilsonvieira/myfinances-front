@@ -2,10 +2,13 @@ import React from 'react'
 import './DeleteUser.css';
 
 import { withRouter  } from 'react-router-dom';
-import axios from 'axios';
 
 import Card from '../../components/Card'
 import FormGroup from '../../components/FormGroup'
+
+import UserApiService from '../../services/UserApiService';
+
+import { showSuccessMessage, showErrorMessage, showWarningMessage } from '../../components/Toastr';
 
 class DeleteUser extends React.Component{
 
@@ -13,11 +16,16 @@ class DeleteUser extends React.Component{
         id: 0,
     }
 
+    constructor(){
+        super();
+        this.service = new UserApiService();
+    }
+
     delete = () => {
-        axios.delete(`http://localhost:8080/api/user/${this.state.id}`
+        this.service.delete(`/${this.state.id}`
         ).then( response => 
             {
-                console.log(response);
+                showSuccessMessage(`Usuário ${this.state.id} deletado com sucesso`);
             }
         ).catch( error => 
             {
