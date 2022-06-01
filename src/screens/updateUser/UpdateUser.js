@@ -2,10 +2,11 @@ import React from 'react'
 import './UpdateUser.css';
 
 import { withRouter  } from 'react-router-dom';
-import axios from 'axios';
 
 import Card from '../../components/Card'
 import FormGroup from '../../components/FormGroup'
+
+import UserApiService from '../../services/UserApiService';
 
 class UpdateUser extends React.Component{
 
@@ -17,6 +18,11 @@ class UpdateUser extends React.Component{
         password: '',
     }
 
+    constructor(){
+        super();
+        this.service = new UserApiService();
+    }
+
     componentDidMount(){
         const params = this.props.match.params;
         const id = params.id;
@@ -24,7 +30,16 @@ class UpdateUser extends React.Component{
     }
 
     update = () => {
-        axios.put(`http://localhost:8080/api/user/${this.state.id}`, 
+        // axios.put(`http://localhost:8080/api/user/${this.state.id}`, 
+        //     {
+        //         name: this.state.name,
+        //         email: this.state.email,
+        //         username: this.state.username,
+        //         password: this.state.password
+        //     }
+        // )
+
+        this.service.update(this.state.id, 
             {
                 name: this.state.name,
                 email: this.state.email,
@@ -47,7 +62,7 @@ class UpdateUser extends React.Component{
     }
 
     findById = (userId) => {
-        axios.get(`http://localhost:8080/api/user?id=${userId}`)
+        this.service.get(`?id=${userId}`)
         .then( response => 
             {
                 const user = response.data[0];
