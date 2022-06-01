@@ -86,31 +86,31 @@ class ViewUsers extends React.Component {
                     <div className="row">
                         <div className="col-md-6">
                             <div className="bs-component">
-                                <FormGroup htmlFor="inputId" label="Id: *">
+                                <FormGroup htmlFor="inputId" label="Id:">
                                     <input type="text" 
                                         className="form-control" 
                                         id="inputId" 
                                         value={this.state.id}
                                         onChange={e => this.setState({id: e.target.value})}
-                                        placeholder="Digite o Ano" />
+                                        placeholder="Digite o Id" />
                                 </FormGroup>
 
-                                <FormGroup htmlFor="inputName" label="Name: *">
+                                <FormGroup htmlFor="inputName" label="Name:">
                                     <input type="text" 
                                         className="form-control" 
                                         id="inputName" 
                                         value={this.state.name}
                                         onChange={e => this.setState({name: e.target.value})}
-                                        placeholder="Digite o Ano" />
+                                        placeholder="Digite o Nome" />
                                 </FormGroup>
 
-                                <FormGroup htmlFor="inputEmail" label="Email: *">
+                                <FormGroup htmlFor="inputEmail" label="Email:">
                                     <input type="text" 
                                         className="form-control" 
                                         id="inputEmail" 
                                         value={this.state.email}
                                         onChange={e => this.setState({email: e.target.value})}
-                                        placeholder="Digite o Ano" />
+                                        placeholder="Digite o Email" />
                                 </FormGroup>
 
                                 <button onClick={this.find} 
