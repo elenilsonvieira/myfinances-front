@@ -81,58 +81,60 @@ class ViewUsers extends React.Component {
 
     render(){
         return (
-            <Card title="Consulta Usuários">
-                <div className="row">
-                    <div className="col-md-6">
-                        <div className="bs-component">
-                            <FormGroup htmlFor="inputId" label="Id: *">
-                                <input type="text" 
-                                       className="form-control" 
-                                       id="inputId" 
-                                       value={this.state.id}
-                                       onChange={e => this.setState({id: e.target.value})}
-                                       placeholder="Digite o Ano" />
-                            </FormGroup>
+            <div className='container'>
+                <Card title="Consulta Usuários">
+                    <div className="row">
+                        <div className="col-md-6">
+                            <div className="bs-component">
+                                <FormGroup htmlFor="inputId" label="Id: *">
+                                    <input type="text" 
+                                        className="form-control" 
+                                        id="inputId" 
+                                        value={this.state.id}
+                                        onChange={e => this.setState({id: e.target.value})}
+                                        placeholder="Digite o Ano" />
+                                </FormGroup>
 
-                            <FormGroup htmlFor="inputName" label="Name: *">
-                                <input type="text" 
-                                       className="form-control" 
-                                       id="inputName" 
-                                       value={this.state.name}
-                                       onChange={e => this.setState({name: e.target.value})}
-                                       placeholder="Digite o Ano" />
-                            </FormGroup>
+                                <FormGroup htmlFor="inputName" label="Name: *">
+                                    <input type="text" 
+                                        className="form-control" 
+                                        id="inputName" 
+                                        value={this.state.name}
+                                        onChange={e => this.setState({name: e.target.value})}
+                                        placeholder="Digite o Ano" />
+                                </FormGroup>
 
-                            <FormGroup htmlFor="inputEmail" label="Email: *">
-                                <input type="text" 
-                                       className="form-control" 
-                                       id="inputEmail" 
-                                       value={this.state.email}
-                                       onChange={e => this.setState({email: e.target.value})}
-                                       placeholder="Digite o Ano" />
-                            </FormGroup>
+                                <FormGroup htmlFor="inputEmail" label="Email: *">
+                                    <input type="text" 
+                                        className="form-control" 
+                                        id="inputEmail" 
+                                        value={this.state.email}
+                                        onChange={e => this.setState({email: e.target.value})}
+                                        placeholder="Digite o Ano" />
+                                </FormGroup>
 
-                            <button onClick={this.find} 
-                                    type="button" 
-                                    className="btn btn-success">
-                                    <i className="pi pi-search"></i> Buscar
-                            </button>
+                                <button onClick={this.find} 
+                                        type="button" 
+                                        className="btn btn-success">
+                                        <i className="pi pi-search"></i> Buscar
+                                </button>
 
+                            </div>
+                            
                         </div>
-                        
-                    </div>
-                </div>   
-                <br/ >
-                <div className="row">
-                    <div className="col-md-12">
-                        <div className="bs-component">
-                            <UsersTable users={this.state.users} 
-                                delete={this.delete}
-                                edit={this.edit} />
-                        </div>
-                    </div>  
-                </div>          
-            </Card>
+                    </div>   
+                    <br/ >
+                    <div className="row">
+                        <div className="col-md-12">
+                            <div className="bs-component">
+                                <UsersTable users={this.state.users} 
+                                    delete={this.delete}
+                                    edit={this.edit} />
+                            </div>
+                        </div>  
+                    </div>          
+                </Card>
+            </div>
 
         )
     }
