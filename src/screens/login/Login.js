@@ -30,6 +30,7 @@ class Login extends React.Component {
             }
         ).catch( error => 
             {
+                showErrorMessage('Login inválido!');
                 console.log(error.response);
             }
         );
