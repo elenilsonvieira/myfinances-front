@@ -71,7 +71,7 @@ class ViewUsers extends React.Component {
     }
 
     delete = (userId) => {
-        this.service.delete(`/${userId}`
+        this.service.delete(userId
         ).then( response => 
             {
                 showSuccessMessage(`Usuário ${userId} deletado com sucesso`);

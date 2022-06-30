@@ -9,6 +9,8 @@ import FormGroup from '../../components/FormGroup';
 
 import { showSuccessMessage, showErrorMessage, showWarningMessage } from '../../components/Toastr';
 
+import AuthenticationApiService from '../../services/AuthenticationApiService';
+
 class Login extends React.Component {
 
   state = {
@@ -16,22 +18,24 @@ class Login extends React.Component {
     password: ''
   }
 
+  constructor(){
+    super();
+    this.service = new AuthenticationApiService();
+  }
+
   login = () => {
-        axios.post('http://localhost:8080/api/login', 
-            {
-                username: this.state.username,
-                password: this.state.password
-            }
+        this.service.login(
+                this.state.username,
+                this.state.password
         ).then( response => 
             {
-              localStorage.setItem('loggedUser', JSON.stringify(response.data));
+              //localStorage.setItem('loggedUser', JSON.stringify(response.data));
               showSuccessMessage('Bem vindo!');
               this.props.history.push('/viewUsers');
             }
         ).catch( error => 
             {
                 showErrorMessage('Login inválido!');
-                console.log(error.response);
             }
         );
   }
