@@ -33,11 +33,16 @@ export default class SessionProvider extends React.Component{
         this.service.logout();
     }
 
+    isAuthenticated(){
+        return this.state.loggedUser != null;
+    }
+
     render(){
         const context = {
             loggedUser: this.state.loggedUser,
+            isAuthenticated: this.isAuthenticated(),
             start: this.start,
-            end: this.end
+            end: this.end,
         }
 
         return(

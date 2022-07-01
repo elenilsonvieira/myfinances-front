@@ -1,6 +1,7 @@
 import React from 'react';
 
 import NavbarItem from './NavbarItem';
+import { AuthConsumer } from '../main/SessionProvider';
 
 function Navbar(props){
     return (
@@ -17,8 +18,9 @@ function Navbar(props){
             <ul className="navbar-nav">
                 <NavbarItem href="/" label="Home" />
                 <NavbarItem href="/createUser" label="Cadastrar Usuário" />
-                <NavbarItem href="/viewUsers" label="Usuários" />
+                <NavbarItem render={props.isAuthenticated} href="/viewUsers" label="Usuários" />
                 <NavbarItem href="/login" label="Login" />
+                <NavbarItem render={props.isAuthenticated} onClick={props.logout} href="/login" label="Sair" />
             </ul>
             </div>
         </div>
@@ -26,4 +28,10 @@ function Navbar(props){
     )
 }
 
-export default Navbar;
+export default () => (
+  <AuthConsumer>
+    {(context) => (
+        <Navbar isAuthenticated={context.isAuthenticated} logout={context.end} />
+    )}
+  </AuthConsumer>
+)
