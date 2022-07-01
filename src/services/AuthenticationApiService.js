@@ -17,12 +17,18 @@ export default class AuthenticationApiService extends ApiService {
             "password": password
         };
 
-        await this.post('login', loginDTO)
-        .then( response => 
+        const response = await this.post('login', loginDTO);
+
+        response.then( response => 
             {
                 console.log(response.data);
-                this.storageService.setItem(LOGGED_USER, JSON.stringify(response.data.user));
-                this.storageService.setItem(TOKEN, JSON.stringify(response.data.token));
+                const user = response.data.user;
+                const token = response.data.token;
+
+                this.storageService.setItem(LOGGED_USER, JSON.stringify(user));
+                this.storageService.setItem(TOKEN, JSON.stringify(token));
+
+                ApiService.registerToken(token);
                 return true;
             }
         ).catch( error => 
