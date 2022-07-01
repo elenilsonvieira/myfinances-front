@@ -65,10 +65,7 @@ export default class AuthenticationApiService extends ApiService {
             "token": token
         };
 
-        console.log('responseeee', tokenDTO);
-
         const response = await this.isTokenValid(tokenDTO);
-        
         return response.data;
     }
 

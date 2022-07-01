@@ -20,11 +20,8 @@ export default class SessionProvider extends React.Component{
     async componentDidMount(){
         const isLogged = await this.service.isLogged();
 
-        console.log("isLogged", isLogged);
-        if(isLogged.data){
+        if(isLogged){
             this.start();
-        }else{
-            console.log("não logado");
         }
     }
 
@@ -36,12 +33,13 @@ export default class SessionProvider extends React.Component{
         this.service.registerToken(token);
     }
 
-    end(){
+    end = () => {
+        console.log('encerrando sessão');
         this.setState({loggedUser: null});
         this.service.logout();
     }
 
-    isAuthenticated(){
+    isAuthenticated = () => {
         return this.state.loggedUser != null;
     }
 

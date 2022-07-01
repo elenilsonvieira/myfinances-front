@@ -5,18 +5,6 @@ import Card from '../../components/Card';
 
 export default class Home extends React.Component{
 
-    getLoggedUser = () => {
-        var value = localStorage.getItem('loggedUser');
-
-        if(!value){
-            return null;
-        }
-
-        var user = JSON.parse(value);
-
-        return user;
-    }
-
     render(){
         return (
             <div className='container'>
@@ -26,9 +14,7 @@ export default class Home extends React.Component{
                             <div className="bs-component">
                                 <label>Projeto criado para a disciplina de DAC - IFPB Campus Monteiro</label>
                                 <br />
-                                <label>Elenilson Vieira - elenilson.vieira@ifpb.edu.br</label>
-                                <br />
-                                <label>Usuário logado: { this.getLoggedUser() != null ?  this.getLoggedUser().name : ''}</label>
+                                <label>Prof. Elenilson Vieira - elenilson.vieira@ifpb.edu.br</label>
                             </div>
                         </div>
                     </div>
