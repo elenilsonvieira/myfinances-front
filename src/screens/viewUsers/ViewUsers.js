@@ -61,7 +61,6 @@ class ViewUsers extends React.Component {
             {
                 const users = response.data;
                 this.setState({users});
-                console.log(users);
             }
         ).catch( error => 
             {

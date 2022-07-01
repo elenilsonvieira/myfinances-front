@@ -24,7 +24,7 @@ export default class AuthenticationApiService extends ApiService {
             const user = response.data.user;
             const token = response.data.token;
 
-            this.storageService.setItem(LOGGED_USER, JSON.stringify(user));
+            this.storageService.setObject(LOGGED_USER, JSON.stringify(user));
             this.storageService.setItem(TOKEN, JSON.stringify(token));
 
             this.registerToken(token);
@@ -46,14 +46,14 @@ export default class AuthenticationApiService extends ApiService {
     }
 
     getLoggedUser(){
-        return this.storageService.getItem(LOGGED_USER);
+        return this.storageService.getObject(LOGGED_USER);
     }
 
     getToken(){
         return this.storageService.getItem(TOKEN);
     }
 
-    isLogged(){
+    async isLogged(){
         const user = this.getLoggedUser();
         const token = this.getToken();
 
@@ -61,7 +61,15 @@ export default class AuthenticationApiService extends ApiService {
             return false;
         }
 
-        return this.isTokenValid(token);
+        const tokenDTO = {
+            "token": token
+        };
+
+        console.log('responseeee', tokenDTO);
+
+        const response = await this.isTokenValid(tokenDTO);
+        
+        return response.data;
     }
 
 }

@@ -1,15 +1,23 @@
 export default class StorageService {
     
-    setItem(key, value){
+    setObject(key, value){
         localStorage.setItem(key, JSON.stringify(value));
     }
 
-    getItem(key){
+    getObject(key){
         const item = localStorage.getItem(key);
-        return JSON.parse(item)
+        return JSON.parse(item);
+    }
+
+    setItem(key, value){
+        localStorage.setItem(key, value);
+    }
+
+    getItem(key){
+        return localStorage.getItem(key);
     }
 
     removeItem(key){
-        localStorage.removeItem(key)
+        localStorage.removeItem(key);
     }
 }

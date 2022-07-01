@@ -4,7 +4,7 @@ const baseURL = process.env.REACT_APP_API_URL;
 
 export const httpClient = axios.create({
     baseURL: "http://localhost:8080/api",
-    withCredentials: true
+    withCredentials: true,
 });
 
 export default class ApiService {
@@ -15,6 +15,7 @@ export default class ApiService {
 
     registerToken(token){
         if(token){
+            console.log('token registrado');
             httpClient.defaults.headers.common['Authorization'] = `Bearer ${token}`
         }        
     }
