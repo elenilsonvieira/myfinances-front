@@ -24,8 +24,8 @@ export default class AuthenticationApiService extends ApiService {
             const user = response.data.user;
             const token = response.data.token;
 
-            this.storageService.setObject(LOGGED_USER, JSON.stringify(user));
-            this.storageService.setItem(TOKEN, JSON.stringify(token));
+            this.storageService.setItem(LOGGED_USER, user);
+            this.storageService.setItem(TOKEN, token);
 
             this.registerToken(token);
             return user;
@@ -46,7 +46,7 @@ export default class AuthenticationApiService extends ApiService {
     }
 
     getLoggedUser(){
-        return this.storageService.getObject(LOGGED_USER);
+        return this.storageService.getItem(LOGGED_USER);
     }
 
     getToken(){
