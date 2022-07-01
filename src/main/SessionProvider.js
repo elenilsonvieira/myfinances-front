@@ -6,7 +6,7 @@ export const AuthContext = React.createContext()
 export const AuthConsumer = AuthContext.Consumer;
 const AuthProvider = AuthContext.Provider;
 
-export default class AuthenticationProvider extends React.Component{
+export default class SessionProvider extends React.Component{
 
     state = {
         loggedUser: null
@@ -15,23 +15,29 @@ export default class AuthenticationProvider extends React.Component{
     constructor(){
         super();
         this.service = new AuthenticationApiService();
-      }
+    }
 
     async componentDidMount(){
         const isLogged = this.service.isLogged();
         if(isLogged){
-            this.refresh(this.service.getLoggedUser());
+            this.start(this.service.getLoggedUser());
         }
     }
 
-    refresh = (loggedUser) => {
-        this.setState({loggedUser})
+    start = (loggedUser) => {
+        this.setState({loggedUser});
+    }
+
+    end(){
+        this.setState({loggedUser: null});
+        this.service.logout();
     }
 
     render(){
         const context = {
             loggedUser: this.state.loggedUser,
-            refresh: this.refresh
+            start: this.start,
+            end: this.end
         }
 
         return(
