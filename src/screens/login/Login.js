@@ -24,20 +24,18 @@ class Login extends React.Component {
   }
 
   login = () => {
-        this.service.login(
-                this.state.username,
-                this.state.password
-        ).then( response => 
-            {
-              //localStorage.setItem('loggedUser', JSON.stringify(response.data));
-              showSuccessMessage('Bem vindo!');
-              this.props.history.push('/viewUsers');
-            }
-        ).catch( error => 
-            {
-                showErrorMessage('Login inválido!');
-            }
+        const result = this.service.login(
+              this.state.username,
+              this.state.password
         );
+        
+        if(result) 
+        {
+          showSuccessMessage('Bem vindo!');
+          this.props.history.push('/viewUsers');
+        }else {
+          showErrorMessage('Login inválido!');
+        }
   }
 
   createUser = () => {
