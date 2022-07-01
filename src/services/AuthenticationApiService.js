@@ -7,7 +7,7 @@ export const TOKEN = 'token';
 export default class AuthenticationApiService extends ApiService {
 
     constructor(){
-        super('/api');
+        super('');
         this.storageService = new StorageService();
     }
 
@@ -28,9 +28,9 @@ export default class AuthenticationApiService extends ApiService {
             this.storageService.setItem(TOKEN, JSON.stringify(token));
 
             this.registerToken(token);
-            return true;
+            return user;
         } catch(error){
-            return false;
+            return null;
         }
     }
 

@@ -9,6 +9,7 @@ import FormGroup from '../../components/FormGroup';
 import { showSuccessMessage, showErrorMessage, showWarningMessage } from '../../components/Toastr';
 
 import AuthenticationApiService from '../../services/AuthenticationApiService';
+import { AuthContext  } from '../../main/SessionProvider';
 
 class Login extends React.Component {
 
@@ -26,10 +27,11 @@ class Login extends React.Component {
         this.service.login(
               this.state.username,
               this.state.password
-        ).then(result =>  
+        ).then(user =>  
           {
-            if(result){
-              showSuccessMessage('Bem vindo!');
+            if(user){
+              this.context.start(user);
+              showSuccessMessage(`Bem vindo, ${user.name}`);
               this.props.history.push('/viewUsers');
             }else{
               showErrorMessage('Login inválido!');
@@ -90,4 +92,5 @@ class Login extends React.Component {
 
 }
 
+Login.contextType = AuthContext;
 export default withRouter (Login);
