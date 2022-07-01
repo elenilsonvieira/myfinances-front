@@ -7,7 +7,7 @@ export const TOKEN = 'token';
 export default class AuthenticationApiService extends ApiService {
 
     constructor(){
-        super('/');
+        super('/api');
         this.storageService = new StorageService();
     }
 
@@ -17,33 +17,48 @@ export default class AuthenticationApiService extends ApiService {
             "password": password
         };
 
-        const response = await this.post('login', loginDTO);
+        try{
+            const response = await this.post('/login', loginDTO);
 
-        response.then( response => 
-            {
-                console.log(response.data);
-                const user = response.data.user;
-                const token = response.data.token;
+            console.log(response.data);
+            const user = response.data.user;
+            const token = response.data.token;
 
-                this.storageService.setItem(LOGGED_USER, JSON.stringify(user));
-                this.storageService.setItem(TOKEN, JSON.stringify(token));
+            this.storageService.setItem(LOGGED_USER, JSON.stringify(user));
+            this.storageService.setItem(TOKEN, JSON.stringify(token));
 
-                ApiService.registerToken(token);
-                return true;
-            }
-        ).catch( error => 
-            {
-                return false;
-            }
-        );
+            this.registerToken(token);
+            return true;
+        } catch(error){
+            return false;
+        }
     }
 
     isTokenValid(token){
-        return this.post('isTokenValid', token);
+        return this.post('/isTokenValid', token);
     }
 
     logout(){
-        return this.post('logout');
+        return this.post('/logout');
+    }
+
+    getLoggedUser(){
+        return this.storageService.getItem(LOGGED_USER);
+    }
+
+    getToken(){
+        return this.storageService.getItem(TOKEN);
+    }
+
+    isLogged(){
+        const user = this.getLoggedUser();
+        const token = this.getToken();
+
+        if(!user || !token){
+            return false;
+        }
+
+        return this.isTokenValid(token);
     }
 
 }

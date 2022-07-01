@@ -2,7 +2,6 @@ import React from 'react';
 import './Login.css';
 
 import { withRouter  } from 'react-router-dom';
-import axios from 'axios';
 
 import Card from '../../components/Card';
 import FormGroup from '../../components/FormGroup';
@@ -24,18 +23,23 @@ class Login extends React.Component {
   }
 
   login = () => {
-        const result = this.service.login(
+        this.service.login(
               this.state.username,
               this.state.password
+        ).then(result =>  
+          {
+            if(result){
+              showSuccessMessage('Bem vindo!');
+              this.props.history.push('/viewUsers');
+            }else{
+              showErrorMessage('Login inválido!');
+            }
+          }
+        ).catch( error => 
+          {
+            showErrorMessage('Erro processando autenticação: ', error);
+          }
         );
-        
-        if(result) 
-        {
-          showSuccessMessage('Bem vindo!');
-          this.props.history.push('/viewUsers');
-        }else {
-          showErrorMessage('Login inválido!');
-        }
   }
 
   createUser = () => {
