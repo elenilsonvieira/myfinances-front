@@ -1,4 +1,4 @@
-import ApiService from "./ApiService";
+import ApiService, {LOGGED_USER, TOKEN} from "./ApiService";
 import StorageService from "./StorageService";
 
 export default class AuthenticationApiService extends ApiService {
@@ -17,12 +17,11 @@ export default class AuthenticationApiService extends ApiService {
         try{
             const response = await this.post('/login', loginDTO);
 
-            console.log(response.data);
             const user = response.data.user;
             const token = response.data.token;
 
-            this.storageService.setItem(super.LOGGED_USER, user);
-            this.storageService.setItem(super.TOKEN, token);
+            this.storageService.setItem(LOGGED_USER, user);
+            this.storageService.setItem(TOKEN, token);
 
             this.registerToken(token);
             return user;
@@ -36,18 +35,18 @@ export default class AuthenticationApiService extends ApiService {
     }
 
     logout(){
-        this.storageService.removeItem(super.LOGGED_USER);
-        this.storageService.removeItem(super.TOKEN);
+        this.storageService.removeItem(LOGGED_USER);
+        this.storageService.removeItem(TOKEN);
 
         return this.post('/logout');
     }
 
     getLoggedUser(){
-        return this.storageService.getItem(super.LOGGED_USER);
+        return this.storageService.getItem(LOGGED_USER);
     }
 
     getToken(){
-        return this.storageService.getItem(super.TOKEN);
+        return this.storageService.getItem(TOKEN);
     }
 
     async isAuthenticated(){

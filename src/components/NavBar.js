@@ -18,7 +18,7 @@ function Navbar(props){
             <ul className="navbar-nav">
                 <NavbarItem render={props.isAuthenticated} href="/viewUsers" label="Usuários" />
                 <NavbarItem render={!props.isAuthenticated} href="/login" label="Login" />
-                <NavbarItem render={props.isAuthenticated} onClick={props.logout} href="/login" label="Sair" />
+                <NavbarItem render={props.isAuthenticated} href='/login' onClick={props.logout} label="Sair" />
             </ul>
             </div>
         </div>
