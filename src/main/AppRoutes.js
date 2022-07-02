@@ -10,10 +10,10 @@ import ViewUsers from "../screens/viewUsers/ViewUsers";
 
 import { AuthConsumer } from '../main/SessionProvider';
 
-function AuthenticatedRoute( { component: Component, isAuthenticated, ...props } ){
+function RestrictedRoute( { component: Component, show, ...props } ){
    return (
        <Route exact {...props} render={ (componentProps) => {
-           if(isAuthenticated){
+           if(show){
                return (
                    <Component {...componentProps} />
                )
@@ -33,10 +33,10 @@ function AppRoutes(props) {
             <Route component = { Home }  path="/" exact />
             <Route component = { Login }  path="/login" />
 
-            <AuthenticatedRoute isAuthenticated={props.isAuthenticated} component = { CreateUser }  path="/createUser" />
-            <AuthenticatedRoute isAuthenticated={props.isAuthenticated} component = { UpdateUser }  path="/updateUser/:id" />
-            <AuthenticatedRoute isAuthenticated={props.isAuthenticated} component = { DeleteUser }  path="/deleteUser" />
-            <AuthenticatedRoute isAuthenticated={props.isAuthenticated} component = { ViewUsers }  path="/viewUsers" />
+            <RestrictedRoute show={props.isAuthenticated} component = { CreateUser }  path="/createUser" />
+            <RestrictedRoute show={props.isAuthenticated} component = { UpdateUser }  path="/updateUser/:id" />
+            <RestrictedRoute show={props.isAuthenticated} component = { DeleteUser }  path="/deleteUser" />
+            <RestrictedRoute show={props.isAuthenticated} component = { ViewUsers }  path="/viewUsers" />
          </Switch>
       </BrowserRouter>
    );
