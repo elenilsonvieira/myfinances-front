@@ -28,6 +28,20 @@ export default class SessionProvider extends React.Component{
         this.setState({loading: false});
     }
 
+    login = async (username, password) => {
+        const user = await this.service.login(
+              username,
+              password
+        );
+        
+        if(user){
+            this.start();
+            return user;
+        }else{
+            return null;
+        }
+  }
+
     start = () => {
         const loggedUser = this.service.getLoggedUser();
         const token = this.service.getToken();
@@ -56,6 +70,7 @@ export default class SessionProvider extends React.Component{
             isAuthenticated: this.isAuthenticated(),
             start: this.start,
             end: this.end,
+            login: this.login
         }
 
         return(

@@ -8,7 +8,6 @@ import FormGroup from '../../components/FormGroup';
 
 import { showSuccessMessage, showErrorMessage, showWarningMessage } from '../../components/Toastr';
 
-import AuthenticationApiService from '../../services/AuthenticationApiService';
 import { AuthContext  } from '../../main/SessionProvider';
 
 class Login extends React.Component {
@@ -18,19 +17,13 @@ class Login extends React.Component {
     password: ''
   }
 
-  constructor(){
-    super();
-    this.service = new AuthenticationApiService();
-  }
-
   login = () => {
-        this.service.login(
+        this.context.login(
               this.state.username,
               this.state.password
         ).then(user =>  
           {
             if(user){
-              this.context.start();
               showSuccessMessage(`Bem vindo, ${user.name}`);
               this.props.history.push('/viewUsers');
             }else{
