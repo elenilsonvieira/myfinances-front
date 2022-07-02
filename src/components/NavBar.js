@@ -16,7 +16,6 @@ function Navbar(props){
           </button>
           <div className="collapse navbar-collapse" id="navbarResponsive">
             <ul className="navbar-nav">
-                <NavbarItem href="/" label="Home" />
                 <NavbarItem render={props.isAuthenticated} href="/viewUsers" label="Usuários" />
                 <NavbarItem render={!props.isAuthenticated} href="/login" label="Login" />
                 <NavbarItem render={props.isAuthenticated} onClick={props.logout} href="/login" label="Sair" />

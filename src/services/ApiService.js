@@ -1,4 +1,10 @@
 import axios from "axios";
+import AuthenticationApiService from "./AuthenticationApiService";
+
+import StorageService from "./StorageService";
+
+export const LOGGED_USER = 'loggedUser';
+export const TOKEN = 'token';
 
 const baseURL = process.env.REACT_APP_API_URL;
 
@@ -11,10 +17,13 @@ export default class ApiService {
 
     constructor(endpoint){
         this.endpoint = endpoint;
+        
+        this.storageService = new StorageService();
+        const token = this.storageService.getItem(TOKEN);
+        this.registerToken(token);
     }
 
     registerToken(token){
-        console.log('registrando token', token);
         if(token){
             httpClient.defaults.headers.common['Authorization'] = `Bearer ${token}`
         }        

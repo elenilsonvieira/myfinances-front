@@ -1,9 +1,6 @@
 import ApiService from "./ApiService";
 import StorageService from "./StorageService";
 
-export const LOGGED_USER = 'loggedUser';
-export const TOKEN = 'token';
-
 export default class AuthenticationApiService extends ApiService {
 
     constructor(){
@@ -24,8 +21,8 @@ export default class AuthenticationApiService extends ApiService {
             const user = response.data.user;
             const token = response.data.token;
 
-            this.storageService.setItem(LOGGED_USER, user);
-            this.storageService.setItem(TOKEN, token);
+            this.storageService.setItem(super.LOGGED_USER, user);
+            this.storageService.setItem(super.TOKEN, token);
 
             this.registerToken(token);
             return user;
@@ -39,21 +36,21 @@ export default class AuthenticationApiService extends ApiService {
     }
 
     logout(){
-        this.storageService.removeItem(LOGGED_USER);
-        this.storageService.removeItem(TOKEN);
+        this.storageService.removeItem(super.LOGGED_USER);
+        this.storageService.removeItem(super.TOKEN);
 
         return this.post('/logout');
     }
 
     getLoggedUser(){
-        return this.storageService.getItem(LOGGED_USER);
+        return this.storageService.getItem(super.LOGGED_USER);
     }
 
     getToken(){
-        return this.storageService.getItem(TOKEN);
+        return this.storageService.getItem(super.TOKEN);
     }
 
-    async isLogged(){
+    async isAuthenticated(){
         const user = this.getLoggedUser();
         const token = this.getToken();
 

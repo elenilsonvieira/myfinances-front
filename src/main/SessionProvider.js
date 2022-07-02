@@ -18,14 +18,16 @@ export default class SessionProvider extends React.Component{
     }
 
     async componentDidMount(){
-        const isLogged = await this.service.isLogged();
+        console.log("didmount");
+        const isAuthenticated = await this.service.isAuthenticated();
 
-        if(isLogged){
+        if(isAuthenticated){
             this.start();
         }
     }
 
     start = () => {
+        console.log('iniciando sessão');
         const loggedUser = this.service.getLoggedUser();
         const token = this.service.getToken();
 
