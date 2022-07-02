@@ -9,7 +9,8 @@ const AuthProvider = AuthContext.Provider;
 export default class SessionProvider extends React.Component{
 
     state = {
-        loggedUser: null
+        loggedUser: null,
+        loading: true
     }
 
     constructor(){
@@ -23,6 +24,8 @@ export default class SessionProvider extends React.Component{
         if(isAuthenticated){
             this.start();
         }
+        
+        this.setState({loading: false});
     }
 
     start = () => {
@@ -44,6 +47,10 @@ export default class SessionProvider extends React.Component{
     }
 
     render(){
+        if(this.state.loading){
+            return false;
+        }
+
         const context = {
             loggedUser: this.state.loggedUser,
             isAuthenticated: this.isAuthenticated(),
