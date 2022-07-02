@@ -30,7 +30,7 @@ class Login extends React.Component {
         ).then(user =>  
           {
             if(user){
-              this.context.start(user);
+              this.context.start();
               showSuccessMessage(`Bem vindo, ${user.name}`);
               this.props.history.push('/viewUsers');
             }else{
