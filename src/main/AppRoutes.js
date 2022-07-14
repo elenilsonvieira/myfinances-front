@@ -32,8 +32,8 @@ function AppRoutes(props) {
          <Switch>
             <Route component = { Home }  path="/" exact />
             <Route component = { Login }  path="/login" />
+            <Route component = { CreateUser }  path="/createUser" />
 
-            <RestrictedRoute show={props.isAuthenticated} component = { CreateUser }  path="/createUser" />
             <RestrictedRoute show={props.isAuthenticated} component = { UpdateUser }  path="/updateUser/:id" />
             <RestrictedRoute show={props.isAuthenticated} component = { DeleteUser }  path="/deleteUser" />
             <RestrictedRoute show={props.isAuthenticated} component = { ViewUsers }  path="/viewUsers" />
